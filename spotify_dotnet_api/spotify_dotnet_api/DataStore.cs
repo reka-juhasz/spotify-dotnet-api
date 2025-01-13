@@ -8,13 +8,34 @@ namespace spotify_dotnet_api
 {
     public class DataStore
     {
-        public DataStore() { }
-            public string clientId = ""; // Replace with your actual client ID
-            public string clientSecret = ""; // Replace with your actual client secret
-            public string redirectUri = "http://localhost:8888/callback"; // Ensure this matches your Spotify app settings
-            public string scope = "user-library-read playlist-read-private user-modify-playback-state user-read-playback-state"; // Example scope; adjust as needed
-            //string tokenFilePath = "token.json"; // Path to save/load tokens
-            public string deviceId = "";
+
+        //The clientId, clientSecret and deviceId are empty on purpose. You can generate a clientId and clientSecret 
+        //by creating an app on Spotify for Developers. (https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app)
+        //here you will be provided with a the id and secret.
+        //create a .txt in the /bin/Debug/dotnet-8.0 folder and paste the id and secret into it.
+        public string clientId = ""; 
+        public string clientSecret = ""; 
+        public string redirectUri = "http://localhost:8888/callback"; 
+        public string scope = "user-library-read playlist-read-private user-modify-playback-state user-read-playback-state"; 
+                                                                                                                            
+        public string deviceId = "";
+        public DataStore() {
+
+            string fileName = "api_keys.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            this.clientId = lines[0];
+            this.clientSecret = lines[1];
+            this.deviceId = lines[2];
+
+            Console.WriteLine(clientId);
+            Console.WriteLine(clientSecret);
+            Console.WriteLine(deviceId);
+
+        }
+            
+
+
+
 
         public string ClientId { get { return clientId; } set { clientId = value; } }
         public string ClientSecret { get {  return clientSecret; } set { clientSecret = value; } }

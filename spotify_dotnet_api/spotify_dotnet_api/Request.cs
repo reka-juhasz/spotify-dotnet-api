@@ -1,5 +1,6 @@
 ﻿
 using System.Text;
+using System.Text.Json;
 
 namespace spotify_dotnet_api
 {
@@ -47,6 +48,33 @@ namespace spotify_dotnet_api
             }
 
         }
+        public async Task<String> SendGetRequestReturnString(HttpClient client, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    string[] content_list = content.Split(',');
+                    return content;
+
+                }
+                else
+                {
+                    Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            return "";
+            
+
+        }
+
         public async Task SendPutRequest(HttpClient client, string url) 
         {
             try
@@ -94,14 +122,14 @@ namespace spotify_dotnet_api
 
         public async Task GetTrackInfo(string trackId, string accessToken, HttpClient client)
         {
-            string url = $"https://api.spotify.com/v1/tracks/{trackId}"; // Build the URL
+            string url = $"https://api.spotify.com/v1/tracks/{trackId}"; 
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
 
         public async Task GetAvailableDevices( string accessToken, HttpClient client)
         {
-            string url = $"https://api.spotify.com/v1/me/player/devices"; // Build the URL
+            string url = $"https://api.spotify.com/v1/me/player/devices";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
@@ -112,7 +140,16 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendPutRequest(client, url);
         }
-
+        public async Task<String> GetDefultDeviceId(string accessToken, HttpClient client)
+        {
+            string url = $"https://api.spotify.com/v1/me/player/devices"; // Build the URL
+            await HeaderFormat(client, accessToken);
+           string jsonString = await SendGetRequestReturnString(client, url);
+            using JsonDocument doc = JsonDocument.Parse(jsonString);
+            JsonElement root = doc.RootElement;
+            string id = root.GetProperty("devices")[0].GetProperty("id").GetString();
+            return id;
+        }
         public async Task SkipToNextTrack(string accessToken, HttpClient client, string deviceId)
         {
             string url = $"https://api.spotify.com/v1/me/player/next?device_id={deviceId}";
