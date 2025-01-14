@@ -18,7 +18,10 @@ namespace spotify_dotnet_api
            AccessToken token = new AccessToken( client, dataStore);
            Request request = new Request(client, dataStore);
            await token.InitSession(dataStore);
-           System.Threading.Thread.Sleep(2000);
+            Console.WriteLine(token.publictoken.access_token);
+
+            System.Threading.Thread.Sleep(2000);
+
 
             //dataStore.deviceId = await request.GetDefultDeviceId(token.publictoken.access_token, client);
            Console.WriteLine("        ");

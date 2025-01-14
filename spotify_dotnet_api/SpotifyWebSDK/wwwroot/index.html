@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Web Playback SDK</title>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+</head>
+<body>
+    <h1>Spotify Web Playback SDK</h1>
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            var accessToken = '@Model'; // This will inject the token from your controller
+            const player = new Spotify.Player({
+                name: 'C# App Player',
+                getOAuthToken: cb => { cb(accessToken); },
+                volume: 0.8
+            });
+
+            player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID:', device_id);
+                window.chrome.webview.postMessage(`Device Ready: ${device_id}`);
+            });
+
+            player.addListener('initialization_error', ({ message }) => {
+                console.error('Initialization Error:', message);
+            });
+            player.addListener('authentication_error', ({ message }) => {
+                console.error('Authentication Error:', message);
+            });
+            player.addListener('account_error', ({ message }) => {
+                console.error('Account Error:', message);
+            });
+            player.addListener('playback_error', ({ message }) => {
+                console.error('Playback Error:', message);
+            });
+
+            // Connect to Spotify
+            player.connect();
+        };
+    </script>
+</body>
+</html>
