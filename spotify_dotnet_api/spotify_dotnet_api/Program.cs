@@ -1,47 +1,23 @@
-﻿using System.Net;
-using System.Text;
-using Newtonsoft.Json;
-using System.Web;
-using static System.Net.WebRequestMethods;
-using System.Diagnostics;
-
-namespace spotify_dotnet_api
+﻿namespace spotify_dotnet_api
 {
-    public class Program
+ 
+     public class Program
     {
-
         static async Task Main(string[] args)
         {
-           //Process spotifyProcess = System.Diagnostics.Process.Start("\"C:\\Users\\renna\\AppData\\Roaming\\Spotify\\Spotify.exe\"");
-           DataStore dataStore = new DataStore();
-           HttpClient client = new HttpClient();
-           AccessToken token = new AccessToken( client, dataStore);
-           Request request = new Request(client, dataStore);
-           await token.InitSession(dataStore);
-            Console.WriteLine(token.publictoken.access_token);
+            DataStore dataStore = new DataStore();
+            HttpClient client = new HttpClient();
+            AccessToken token = new AccessToken( client, dataStore);
+            Request request = new Request(client, dataStore);
+            AlbumRequest albumRequest = new AlbumRequest(client, dataStore);
 
-            System.Threading.Thread.Sleep(2000);
+            string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
+            string albumId = "4sD1qg4jwTZR4mvR4Iflk5";// lord huron - strange trails 
+            string[] albums = { "7EbRbTKOAx4p2xgpSDzuP3", "3cQO7jp5S9qLBoIVtbkSM1", "52abbUrmRs1bmdVp01U9e2" }; //mr. kitty - a.i., twenty one pilots - blurryface, chase atlantic - beauty in death
 
+            await token.InitSession(dataStore);
 
-            //dataStore.deviceId = await request.GetDefultDeviceId(token.publictoken.access_token, client);
-           Console.WriteLine("        ");
-           string trackId = "3Zwu2K0Qa5sT6teCCHPShP";
-
-
-            //spotifyProcess.Kill(); // Ends the process
-            //spotifyProcess.Dispose();
-
-            //await request.GetTrackInfo(trackId, token.publictoken.access_token, client);
-            //await request.PlayTrack(token.publictoken.access_token, client, dataStore.deviceId);
-            await request.GetAvailableDevices(token.publictoken.access_token, client);
-            
-
-            System.Threading.Thread.Sleep(500);
-            await request.SkipToNextTrack(token.publictoken.access_token, client, dataStore.deviceId);
-
-
+            await albumRequest.SaveAlbumsForCurrentUser(albums, token.publictoken.access_token, client);
         }
-
-
     }
 }

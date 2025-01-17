@@ -16,7 +16,7 @@ namespace spotify_dotnet_api
         public string clientId = ""; 
         public string clientSecret = ""; 
         public string redirectUri = "http://localhost:8888/callback"; 
-        public string scope = "user-library-read playlist-read-private user-modify-playback-state user-read-playback-state"; 
+        public string scope = "user-library-read playlist-read-private user-modify-playback-state user-read-playback-state user-library-modify"; 
                                                                                                                             
         public string deviceId = "";
         public DataStore() {
