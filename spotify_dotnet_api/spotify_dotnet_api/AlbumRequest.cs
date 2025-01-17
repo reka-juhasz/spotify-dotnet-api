@@ -20,11 +20,11 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
         }
         //returns info on multiple selected albums
-        public async Task GetMultipleAlbums(string[] albumIds, string aceessToken, HttpClient client)
+        public async Task GetMultipleAlbumInfo(string[] albumIds, string accessToken, HttpClient client)
         {
             foreach (string albumId in albumIds)
             {
-                await GetAlbumInfo(albumId, aceessToken, client);
+                await GetAlbumInfo(albumId, accessToken, client);
             }
         }
 
