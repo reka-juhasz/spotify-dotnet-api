@@ -83,7 +83,7 @@ namespace spotify_dotnet_api
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Playback started successfully.");
+                    Console.WriteLine("Put request sent successfully.");
                 }
                 else
                 {
@@ -105,7 +105,7 @@ namespace spotify_dotnet_api
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Playback started successfully.");
+                    Console.WriteLine("Send request sent successfully.");
                 }
                 else
                 {
@@ -119,6 +119,30 @@ namespace spotify_dotnet_api
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+        public async Task SendDeleteRequest(HttpClient client, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Requested items were deleted!");
+                }
+                else
+                {
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                    Console.WriteLine($"Error: {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        //////////
 
         public async Task GetTrackInfo(string trackId, string accessToken, HttpClient client)
         {
