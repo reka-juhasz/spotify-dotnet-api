@@ -14,6 +14,7 @@
             AlbumRequest albumRequest = new AlbumRequest(client, dataStore);
             ArtistRequest artistRequest = new ArtistRequest(client, dataStore);
             CategoryRequest categoryRequest = new CategoryRequest(client, dataStore);   
+            EpisodeRequest episodeRequest = new EpisodeRequest(client, dataStore);
 
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
@@ -23,18 +24,22 @@
             string artistId = "5v2WhpA59TJSdPh7LCx1lN"; // BONES
             string[] artists = { "5v2WhpA59TJSdPh7LCx1lN" , "6PfSUFtkMVoDkx4MQkzOi3", "3QaxveoTiMetZCMp1sftiu" }; //BONES, 100gec, waterparks
 
-            string categoryId = "0JQ5DAqbMKFz6FAsUtgAab"; //made for you
+            string categoryId = "0JQ5DAqbMKFz6FAsUtgAab"; // made for you
 
+            string episodeId = "6zs79bz9Nb0lXhoHtGDudJ"; // welcome night vale ep 1.
+            string[] episodes = { "6zs79bz9Nb0lXhoHtGDudJ", "2JYJ9OCjJRhkAhAZ5TqKij", "2Vp7UdSnYpX4Jldd5exkqt" }; // welcome night vale ep 1., cortex ep 1., magnus archives ep 1. 
 
             //////////////////////////////////
             await token.InitSession(dataStore);
             //////////////////////////////////
 
+            await episodeRequest.GetUserSavedEpisodes( token.publictoken.access_token, client);
+
+            await episodeRequest.SaveEpisodesForCurrentUser(episodes, token.publictoken.access_token, client);
+            await episodeRequest.DeleteEpisodesForCurrentUser(episodes, token.publictoken.access_token, client);
 
 
-            await categoryRequest.GetConcreteCategory(categoryId, token.publictoken.access_token, client);
-
-            await categoryRequest.GetMultipleCategories(token.publictoken.access_token, client);
+            
             
             
             
