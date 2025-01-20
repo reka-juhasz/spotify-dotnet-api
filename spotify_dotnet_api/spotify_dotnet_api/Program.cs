@@ -15,6 +15,7 @@
             ArtistRequest artistRequest = new ArtistRequest(client, dataStore);
             CategoryRequest categoryRequest = new CategoryRequest(client, dataStore);   
             EpisodeRequest episodeRequest = new EpisodeRequest(client, dataStore);
+            MarketRequest marketRequest = new MarketRequest(client, dataStore);
 
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
@@ -32,12 +33,9 @@
             //////////////////////////////////
             await token.InitSession(dataStore);
             //////////////////////////////////
+            await marketRequest.GetAvailableMarkets(token.publictoken.access_token, client);
 
-            await episodeRequest.GetUserSavedEpisodes( token.publictoken.access_token, client);
-
-            await episodeRequest.SaveEpisodesForCurrentUser(episodes, token.publictoken.access_token, client);
-            await episodeRequest.DeleteEpisodesForCurrentUser(episodes, token.publictoken.access_token, client);
-
+           
 
             
             
