@@ -142,6 +142,40 @@ namespace spotify_dotnet_api
             }
         }
 
+        public async Task SendPutRequestWithContent(HttpClient client, string url, StringContent content)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Put request sent successfully.");
+                }
+                else
+                {
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                    Console.WriteLine($"Error: {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         //////////
 
         public async Task GetTrackInfo(string trackId, string accessToken, HttpClient client)
@@ -151,19 +185,9 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
         }
 
-        public async Task GetAvailableDevices( string accessToken, HttpClient client)
-        {
-            string url = $"https://api.spotify.com/v1/me/player/devices";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
+       
 
-        public async Task PlayTrack(string accessToken, HttpClient client, string deviceId)
-        {
-            string url = $"https://api.spotify.com/v1/me/player/play?device_id={deviceId}";
-            await HeaderFormat(client, accessToken);
-            await SendPutRequest(client, url);
-        }
+       
         public async Task<String> GetDefultDeviceId(string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/player/devices"; // Build the URL
@@ -174,10 +198,6 @@ namespace spotify_dotnet_api
             string id = root.GetProperty("devices")[0].GetProperty("id").GetString();
             return id;
         }
-        public async Task SkipToNextTrack(string accessToken, HttpClient client, string deviceId)
-        {
-            string url = $"https://api.spotify.com/v1/me/player/next?device_id={deviceId}";
-            await SendPostRequest(client, url);
-        }
+    
     }
 }

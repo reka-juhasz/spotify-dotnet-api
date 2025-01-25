@@ -1,4 +1,6 @@
-﻿namespace spotify_dotnet_api
+﻿using System.Text;
+
+namespace spotify_dotnet_api
 {
  
      public class Program
@@ -16,6 +18,7 @@
             CategoryRequest categoryRequest = new CategoryRequest(client, dataStore);   
             EpisodeRequest episodeRequest = new EpisodeRequest(client, dataStore);
             MarketRequest marketRequest = new MarketRequest(client, dataStore);
+            PlayerRequest playerRequest = new PlayerRequest(client, dataStore);
 
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
@@ -33,15 +36,27 @@
             //////////////////////////////////
             await token.InitSession(dataStore);
             //////////////////////////////////
-            await marketRequest.GetAvailableMarkets(token.publictoken.access_token, client);
+            ///
 
-           
 
-            
-            
-            
-            
+            await playerRequest.StartOrResumeTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
 
+            Thread.Sleep(5000);
+
+            await playerRequest.PauseTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
+
+            //Thread.Sleep(50);
+
+            //await playerRequest.SkipToNextTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
+
+            //Thread.Sleep(5000);
+
+            //await playerRequest.SkipToPreviousTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
+            //Thread.Sleep(50);
+            //await playerRequest.SetRepeatMode(token.publictoken.access_token, client, RepeatEnum.OFF);
+
+            //await playerRequest.GetRecentlyPlayedTracks(token.publictoken.access_token, client);
+            await playerRequest.AddItemToQueue(token.publictoken.access_token, client, episodeId, true);
 
 
 
