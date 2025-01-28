@@ -17,7 +17,6 @@ namespace spotify_dotnet_api
             string url = $"https://api.spotify.com/v1/markets";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
-
         }
     }
 }

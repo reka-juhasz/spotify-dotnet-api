@@ -167,6 +167,57 @@ namespace spotify_dotnet_api
 
 
 
+        public async Task SendPostRequestWithContent(HttpClient client, string url, StringContent content)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Post request sent successfully.");
+                }
+                else
+                {
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                    Console.WriteLine($"Error: {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        public async Task SendDeleteRequestWithContent(HttpClient client, string url,  StringContent content)
+        {
+            // Create HttpRequestMessage for DELETE with a body
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(url),
+                Content = content
+            };
+
+            // Send the request
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            // Handle the response
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Delete request sent successfully.");
+            }
+            else
+            {
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                Console.WriteLine($"Error message: {errorMessage}");
+            }
+
+        }
+
+
 
 
 

@@ -19,6 +19,7 @@ namespace spotify_dotnet_api
             EpisodeRequest episodeRequest = new EpisodeRequest(client, dataStore);
             MarketRequest marketRequest = new MarketRequest(client, dataStore);
             PlayerRequest playerRequest = new PlayerRequest(client, dataStore);
+            PlaylistRequest playlistRequest = new PlaylistRequest(client, dataStore);
 
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
@@ -33,34 +34,17 @@ namespace spotify_dotnet_api
             string episodeId = "6zs79bz9Nb0lXhoHtGDudJ"; // welcome night vale ep 1.
             string[] episodes = { "6zs79bz9Nb0lXhoHtGDudJ", "2JYJ9OCjJRhkAhAZ5TqKij", "2Vp7UdSnYpX4Jldd5exkqt" }; // welcome night vale ep 1., cortex ep 1., magnus archives ep 1. 
 
+            string playlistId = "3KGWxud7ZLePffJH9OaPom";
             //////////////////////////////////
             await token.InitSession(dataStore);
             //////////////////////////////////
             ///
 
+            await playlistRequest.ChangePlaylistName(token.publictoken.access_token, client, playlistId,"testname");
+            await playlistRequest.ChangePlaylistDescription(token.publictoken.access_token, client, playlistId, "this is a test description :D");
+            
 
-            await playerRequest.StartOrResumeTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
-
-            Thread.Sleep(5000);
-
-            await playerRequest.PauseTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
-
-            //Thread.Sleep(50);
-
-            //await playerRequest.SkipToNextTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
-
-            //Thread.Sleep(5000);
-
-            //await playerRequest.SkipToPreviousTrack(token.publictoken.access_token, client, "ec2c92eea7bd509618e8f79e7188eaf7fdf8f0c3");
-            //Thread.Sleep(50);
-            //await playerRequest.SetRepeatMode(token.publictoken.access_token, client, RepeatEnum.OFF);
-
-            //await playerRequest.GetRecentlyPlayedTracks(token.publictoken.access_token, client);
-            await playerRequest.AddItemToQueue(token.publictoken.access_token, client, episodeId, true);
-
-
-
-
+            await playlistRequest.DeleteTrackFromPlaylist(token.publictoken.access_token, client, playlistId, trackId);
         }
     }
 }
