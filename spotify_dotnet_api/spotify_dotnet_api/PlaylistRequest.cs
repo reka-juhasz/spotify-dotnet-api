@@ -90,10 +90,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
-
-
-
         public async Task DeleteTrackFromPlaylist(string accessToken, HttpClient client, string playlistId, string trackId)
         {
             string url = $"https://api.spotify.com/v1/playlists/{playlistId}/tracks";
@@ -103,9 +99,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
 
             await SendDeleteRequestWithContent(client, url, content);
-
-
-
         }
 
         public async Task GetCurrentUserPlaylist(string accessToken, HttpClient client)
@@ -114,7 +107,57 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
+        public async Task GetUserPlaylist(string accessToken, HttpClient client, string userId)
+        {
+            string url = $"https://api.spotify.com/v1/users/{userId}/playlists";
+            await HeaderFormat(client, accessToken);
+            await SendGetRequest(client, url);
+        }
+        public async Task CreatePlaylist(string accessToken, HttpClient client, string userId, string playlistName)
+        {
+            string url = $"https://api.spotify.com/v1/users/{userId}/playlists";
+            string inner_content = $"{{\"name\": \"{playlistName}\"}}";
+            StringContent content = new StringContent(inner_content, Encoding.UTF8, "application/json");
 
+            await HeaderFormat(client, accessToken);
+            await SendPostRequestWithContent(client, url, content);
+        }
+
+        public async Task GetFeaturedPlaylists(string accessToken, HttpClient client)
+        {
+            string url = $"https://api.spotify.com/v1/browse/featured-playlists";
+            await HeaderFormat(client, accessToken);
+            await SendGetRequest(client, url);
+        }
+        public async Task GetCategoryPlaylist(string accessToken, HttpClient client)
+        {
+            string url = $"https://api.spotify.com/v1/browse/categories/dinner/playlists";
+            await HeaderFormat(client, accessToken);
+            await SendGetRequest(client, url);
+        }
+
+        public async Task GetPlaylistImage(string accessToken, HttpClient client, string playlistId)
+        {
+            string url = $"https://api.spotify.com/v1/playlists/{playlistId}/images";
+            await HeaderFormat(client, accessToken);
+            await SendGetRequest(client, url);
+        }
+
+        public async Task AddCoverImage(string accessToken, HttpClient client, string playlistId, string filepath)
+        {
+            string url = $"https://api.spotify.com/v1/playlists/{playlistId}/images";
+            byte[] imageArray = System.IO.File.ReadAllBytes(filepath);
+            string image = Convert.ToBase64String(imageArray);
+            StringContent content = new StringContent(image, Encoding.UTF8, "image/jpeg");
+            await HeaderFormat(client, accessToken);
+            await SendPutRequestWithContent(client, url, content);
+
+
+
+
+
+
+        }
 
     }
 }
