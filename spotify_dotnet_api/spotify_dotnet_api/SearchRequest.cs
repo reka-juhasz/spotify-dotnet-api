@@ -11,48 +11,9 @@ namespace spotify_dotnet_api
         public SearchRequest(HttpClient client, DataStore dataStore) : base(client, dataStore)
         {
         }
-        public async Task SearchSpotifyAlbum(string accessToken, HttpClient client, string query)
+        public async Task SearchSpotify(string accessToken, HttpClient client, string query, SearchEnum type)
         {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"album"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-        public async Task SearchSpotifyArtist(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"artist"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-        public async Task SearchSpotifyPlaylist(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"playlist"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-
-        public async Task SearchSpotifyTrack(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"track"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-        public async Task SearchSpotifyShow(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"show"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-
-        public async Task SearchSpotifyEpisode(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"episode"}";
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
-
-        public async Task SearchSpotifyAudiobook(string accessToken, HttpClient client, string query)
-        {
-            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={"audiobook"}";
+            string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={type.ToString()}";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }

@@ -41,7 +41,7 @@ namespace spotify_dotnet_api
             await token.InitSession(dataStore);
             //////////////////////////////////
             await playlistRequest.GetPlaylistImage(token.publictoken.access_token, client, "36hKiF1CeVgzpiJqLL1fWu");
-            await searchRequest.SearchSpotify(token.publictoken.access_token, client, "dream diver", "track");
+            await searchRequest.SearchSpotify(token.publictoken.access_token, client, "radioactive", SearchEnum.track);
         
         } 
     }
