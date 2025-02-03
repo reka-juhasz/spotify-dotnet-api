@@ -56,10 +56,5 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
-
-
-
-
     }
 }

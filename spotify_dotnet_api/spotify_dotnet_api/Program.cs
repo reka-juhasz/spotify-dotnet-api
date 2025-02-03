@@ -21,6 +21,7 @@ namespace spotify_dotnet_api
             PlayerRequest playerRequest = new PlayerRequest(client, dataStore);
             PlaylistRequest playlistRequest = new PlaylistRequest(client, dataStore);
             UserRequest userRequest = new UserRequest(client, dataStore);
+            SearchRequest searchRequest = new SearchRequest(client, dataStore);
 
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
@@ -40,6 +41,8 @@ namespace spotify_dotnet_api
             await token.InitSession(dataStore);
             //////////////////////////////////
             await playlistRequest.GetPlaylistImage(token.publictoken.access_token, client, "36hKiF1CeVgzpiJqLL1fWu");
+            await searchRequest.SearchSpotify(token.publictoken.access_token, client, "dream diver", "track");
+        
         } 
     }
 }
