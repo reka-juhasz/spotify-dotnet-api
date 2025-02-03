@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace spotify_dotnet_api
 {
-    public enum SearchEnum
+    public enum TypeEnum
     {
         album,
         artist,

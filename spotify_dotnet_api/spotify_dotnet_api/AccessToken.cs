@@ -40,7 +40,7 @@ namespace spotify_dotnet_api
                 if (authorizationCode != null)
                 {
                     // Exchange the authorization code for an access token
-                    var tokenResponse = await GetSpotifyAccessToken( dataStore, authorizationCode);
+                    var tokenResponse = await GetSpotifyAccessToken(dataStore, authorizationCode);
 
 
                     // Store the new token for future use
@@ -53,7 +53,7 @@ namespace spotify_dotnet_api
             }
         }
 
-        public async Task<TokenResponse> GetSpotifyAccessToken(DataStore dataStore ,string authorizationCode)
+        public async Task<TokenResponse> GetSpotifyAccessToken(DataStore dataStore, string authorizationCode)
         {
             string tokenUrl = "https://accounts.spotify.com/api/token";
 
@@ -122,6 +122,10 @@ namespace spotify_dotnet_api
         public bool IsTokenExpired(TokenResponse token)
         {
             return token.expires_in <= 0;
+        }
+        public string GetToken()
+        {
+            return this.publictoken.access_token;
         }
 
         

@@ -11,7 +11,7 @@ namespace spotify_dotnet_api
         public SearchRequest(HttpClient client, DataStore dataStore) : base(client, dataStore)
         {
         }
-        public async Task SearchSpotify(string accessToken, HttpClient client, string query, SearchEnum type)
+        public async Task SearchSpotify(string accessToken, HttpClient client, string query, TypeEnum type)
         {
             string url = $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(query)}&type={type.ToString()}";
             await HeaderFormat(client, accessToken);

@@ -227,14 +227,9 @@ namespace spotify_dotnet_api
 
 
 
-        //////////
+        ////////// 
 
-        public async Task GetTrackInfo(string trackId, string accessToken, HttpClient client)
-        {
-            string url = $"https://api.spotify.com/v1/tracks/{trackId}"; 
-            await HeaderFormat(client, accessToken);
-            await SendGetRequest(client, url);
-        }
+     
 
        
 

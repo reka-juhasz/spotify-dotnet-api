@@ -23,6 +23,7 @@ namespace spotify_dotnet_api
             UserRequest userRequest = new UserRequest(client, dataStore);
             SearchRequest searchRequest = new SearchRequest(client, dataStore);
 
+            TrackRequest trackRequest = new TrackRequest(client, dataStore);
             string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
 
             string albumId = "4sD1qg4jwTZR4mvR4Iflk5";// lord huron - strange trails 
@@ -40,9 +41,9 @@ namespace spotify_dotnet_api
             //////////////////////////////////
             await token.InitSession(dataStore);
             //////////////////////////////////
-            await playlistRequest.GetPlaylistImage(token.publictoken.access_token, client, "36hKiF1CeVgzpiJqLL1fWu");
-            await searchRequest.SearchSpotify(token.publictoken.access_token, client, "radioactive", SearchEnum.track);
-        
+            ///
+            await trackRequest.CheckUserSavedTrack(token.GetToken(), client, trackId);
+           
         } 
     }
 }
