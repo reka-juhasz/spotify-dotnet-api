@@ -1,6 +1,0 @@
-@SpotifyWebSDK_HostAddress = http://localhost:5032
-
-GET {{SpotifyWebSDK_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
