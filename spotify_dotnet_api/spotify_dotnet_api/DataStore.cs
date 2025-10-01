@@ -9,8 +9,7 @@
         public string clientId = ""; 
         public string clientSecret = ""; 
         public string redirectUri = "http://localhost:8888/callback"; 
-        public string scope = "user-top-read ugc-image-upload playlist-modify-public playlist-modify-private user-read-playback-position user-read-playback-state user-read-playback-position user-library-read playlist-read-private user-modify-playback-state user-read-playback-state user-library-modify user-read-recently-played"; 
-                                                                                                                            
+        public string scope = "user-top-read ugc-image-upload playlist-modify-public playlist-modify-private user-read-playback-position user-read-playback-state user-read-playback-position user-library-read playlist-read-private user-modify-playback-state user-read-playback-state user-library-modify user-read-recently-played";                                                                                                                            
         public string deviceId = "";
         public DataStore() {
 
@@ -32,3 +31,4 @@
         public string DeviceId { get {  return deviceId; } set { deviceId = value; } }       
     }
 }
+

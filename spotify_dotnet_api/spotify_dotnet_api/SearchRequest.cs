@@ -19,3 +19,4 @@ namespace spotify_dotnet_api
         }
     }
 }
+

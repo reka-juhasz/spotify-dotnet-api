@@ -1,5 +1,4 @@
-﻿
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 
 namespace spotify_dotnet_api
@@ -164,9 +163,6 @@ namespace spotify_dotnet_api
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
-
-
-
         public async Task SendPostRequestWithContent(HttpClient client, string url, StringContent content)
         {
             try
@@ -216,24 +212,7 @@ namespace spotify_dotnet_api
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
         ////////// 
-
-     
-
-       
-
-       
         public async Task<String> GetDefultDeviceId(string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/player/devices"; // Build the URL
@@ -243,7 +222,6 @@ namespace spotify_dotnet_api
             JsonElement root = doc.RootElement;
             string id = root.GetProperty("devices")[0].GetProperty("id").GetString();
             return id;
-        }
-    
+        }   
     }
 }

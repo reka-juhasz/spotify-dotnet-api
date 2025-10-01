@@ -7,11 +7,10 @@ namespace spotify_dotnet_api
     {
         static async Task Main(string[] args)
         {
+            //initializing all possible request types for testing
             DataStore dataStore = new DataStore();
             HttpClient client = new HttpClient();
-
             Request request = new Request(client, dataStore);
-
             AlbumRequest albumRequest = new AlbumRequest(client, dataStore);
             ArtistRequest artistRequest = new ArtistRequest(client, dataStore);
             CategoryRequest categoryRequest = new CategoryRequest(client, dataStore);
@@ -21,32 +20,14 @@ namespace spotify_dotnet_api
             PlaylistRequest playlistRequest = new PlaylistRequest(client, dataStore);
             UserRequest userRequest = new UserRequest(client, dataStore);
             SearchRequest searchRequest = new SearchRequest(client, dataStore);
-
             TrackRequest trackRequest = new TrackRequest(client, dataStore);
-            string trackId = "0ivCnFLnjjgjDSRMSz0kik";// mr. kitty - dream diver
+           
 
-            string albumId = "4sD1qg4jwTZR4mvR4Iflk5";// lord huron - strange trails 
-            string[] albums = { "7EbRbTKOAx4p2xgpSDzuP3", "3cQO7jp5S9qLBoIVtbkSM1", "52abbUrmRs1bmdVp01U9e2" }; //mr. kitty - a.i., twenty one pilots - blurryface, chase atlantic - beauty in death
-
-            string artistId = "5v2WhpA59TJSdPh7LCx1lN"; // BONES
-            string[] artists = { "5v2WhpA59TJSdPh7LCx1lN", "6PfSUFtkMVoDkx4MQkzOi3", "3QaxveoTiMetZCMp1sftiu" }; //BONES, 100gec, waterparks
-
-            string categoryId = "0JQ5DAqbMKFz6FAsUtgAab"; // made for you
-
-            string episodeId = "6zs79bz9Nb0lXhoHtGDudJ"; // welcome night vale ep 1.
-            string[] episodes = { "6zs79bz9Nb0lXhoHtGDudJ", "2JYJ9OCjJRhkAhAZ5TqKij", "2Vp7UdSnYpX4Jldd5exkqt" }; // welcome night vale ep 1., cortex ep 1., magnus archives ep 1. 
-
-            string playlistId = "3KGWxud7ZLePffJH9OaPom";
-
-      
+            //Creating an AccessToken object and initializing a new session, you may need to log in the browser
             AccessToken accessTokenManager = new AccessToken(client, dataStore);
-
             await accessTokenManager.InitSession(dataStore);
-
+            //Access token in string for easy method calling
             string token = accessTokenManager.GetToken();
-            //await playerRequest.GetAvailableDevices(token, client);
-            await playerRequest.SkipToPreviousTrack(token, client, "68b865f7bd07c120d8d6345586c0ceb4a55680e9");
-            await playerRequest.GetUserQueue(token, client);
 
         } 
     }

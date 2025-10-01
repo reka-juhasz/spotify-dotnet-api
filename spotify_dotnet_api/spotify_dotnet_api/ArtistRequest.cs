@@ -5,7 +5,6 @@
         public ArtistRequest(HttpClient client, DataStore dataStore) : base(client, dataStore)
         {
         }
-
         public async Task GetArtistInfo(string artistId, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/artists/{artistId}";
@@ -34,3 +33,4 @@
         }
     }
 }
+

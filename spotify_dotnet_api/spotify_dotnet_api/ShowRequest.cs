@@ -29,14 +29,12 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         public async Task GetSavedShows(string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/shows";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         public async Task SaveShowForUser(string accessToken, HttpClient client, string showId)
         {
             string url = $"https://api.spotify.com/v1/me/shows?ids={showId}";

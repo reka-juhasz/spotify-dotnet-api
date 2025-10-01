@@ -37,8 +37,6 @@
             await HeaderFormat(client, accessToken);
             await SendPutRequest(client, url);
         }
-
-        //deleted requested episodes from user's library
         public async Task DeleteEpisodesForCurrentUser(string[] episodes, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/episodes?ids=";
@@ -51,7 +49,6 @@
             await HeaderFormat(client, accessToken);
             await SendDeleteRequest(client, url);
         }
-
         public async Task CheckUsersSavedEpisodes(string[] episodes, string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/me/episodes/contains?ids=";
@@ -66,3 +63,4 @@
         }
     }
 }
+

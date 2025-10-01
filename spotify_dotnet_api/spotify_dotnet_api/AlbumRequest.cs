@@ -36,7 +36,7 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
 
         }
-        
+    
         //returns user's saved albums 
         public async Task GetUserSavedAlbums( string accessToken, HttpClient client)
         {
@@ -44,7 +44,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         //saves requested albums to user's library 
         public async Task SaveAlbumsForCurrentUser(string[] albumIds, string accessToken, HttpClient client)
         {
@@ -58,8 +57,7 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendPutRequest(client, url);
         }
-
-        //deleted requested albums from user's library
+        //Deleted requested albums from user's library
         public async Task DeleteAlbumsForCurrentUser(string[] albumIds, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/albums?ids=";
@@ -73,7 +71,7 @@ namespace spotify_dotnet_api
             await SendDeleteRequest(client, url);
         }
 
-        //checks wether requested albums are saved or not
+        //Checks wether requested albums are saved or not
         public async Task CheckUsersSavedAlbums(string[] albumIds, string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/me/albums/contains?ids=";
@@ -87,14 +85,13 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
         }
 
-        //shows new releases
+        //Shows new releases
         public async Task GetNewReleases(string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/browse/new-releases";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
-
         }
-
     }
+
 }

@@ -151,13 +151,6 @@ namespace spotify_dotnet_api
             StringContent content = new StringContent(image, Encoding.UTF8, "image/jpeg");
             await HeaderFormat(client, accessToken);
             await SendPutRequestWithContent(client, url, content);
-
-
-
-
-
-
         }
-
     }
 }

@@ -18,7 +18,6 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
 
         }
-
         public async Task TransferPlayback(string accessToken, HttpClient client, string deviceId)
         {
             string inner_content = $"{{\"device_ids\": [\"{deviceId}\"]}}";
@@ -27,8 +26,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendPutRequestWithContent(client, url, content);
         }
-
-
         public async Task GetAvailableDevices(string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/player/devices";
@@ -43,14 +40,12 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
 
         }
-
         public async Task StartOrResumeTrack(string accessToken, HttpClient client, string deviceId)
         {
             string url = $"https://api.spotify.com/v1/me/player/play?device_id={deviceId}";
             await HeaderFormat(client, accessToken);
             await SendPutRequest(client, url);
         }
-
         public async Task PauseTrack(string accessToken, HttpClient client, string deviceId)
         {
             string url = $"https://api.spotify.com/v1/me/player/pause?device_id={deviceId}";
@@ -111,7 +106,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendPutRequest(client, url);
         }
-
         public async Task GetRecentlyPlayedTracks(string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/me/player/recently-played";
@@ -119,7 +113,6 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
 
         }
-
         public async Task GetUserQueue(string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/me/player/queue";
@@ -127,7 +120,6 @@ namespace spotify_dotnet_api
             await SendGetRequest(client, url);
 
         }
-
         public async Task AddItemToQueue(string accessToken, HttpClient client, string itemId, bool isEpisode)
         {
             string url = "";
@@ -142,8 +134,7 @@ namespace spotify_dotnet_api
             }
             await HeaderFormat(client, accessToken);
             await SendPostRequest(client, url);
-
         }
-
     }
 }
+
