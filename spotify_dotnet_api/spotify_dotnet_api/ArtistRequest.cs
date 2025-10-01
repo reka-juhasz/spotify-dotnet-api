@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace spotify_dotnet_api
+﻿namespace spotify_dotnet_api
 {
     public class ArtistRequest : Request
     {
@@ -18,8 +12,6 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
-
         public async Task GetMultipleArtistInfo(string[] artists, string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/artists?ids=";
@@ -28,21 +20,17 @@ namespace spotify_dotnet_api
                 await GetArtistInfo(artistId, accessToken, client);
             }
         }
-
         public async Task GetArtistAlbums(string artistId, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/artists/{artistId}/albums";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         public async Task GetArtistTopTracks(string artistId, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/artists/{artistId}/top-tracks";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
-   
     }
 }

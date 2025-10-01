@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace spotify_dotnet_api
+﻿namespace spotify_dotnet_api
 {
     public class EpisodeRequest : Request
     {
         public EpisodeRequest(HttpClient client, DataStore dataStore) : base(client, dataStore)
         {
         }
-
         public async Task GetEpisodeInfo(string episodeId, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/episodes/{episodeId}";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         public async Task GetMultipleEpisodeInfo(string[] episodes, string accessToken, HttpClient client)
         {
             string url = "https://api.spotify.com/v1/artists?ids=";
@@ -27,14 +19,12 @@ namespace spotify_dotnet_api
                 await GetEpisodeInfo(episodeId, accessToken, client);
             }
         }
-
         public async Task GetUserSavedEpisodes(string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/episodes";
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
         public async Task SaveEpisodesForCurrentUser(string[] episodes, string accessToken, HttpClient client)
         {
             string url = $"https://api.spotify.com/v1/me/episodes?ids=";
@@ -74,7 +64,5 @@ namespace spotify_dotnet_api
             await HeaderFormat(client, accessToken);
             await SendGetRequest(client, url);
         }
-
-
     }
 }

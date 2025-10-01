@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -16,8 +15,6 @@ namespace spotify_dotnet_api
             this.client = client;
             this.dataStore = dataStore;
         }
-
-
         public async Task InitSession(DataStore dataStore)
         {
             string authUrl = $"https://accounts.spotify.com/authorize?client_id={dataStore.clientId}&response_type=code&redirect_uri={Uri.EscapeDataString(dataStore.redirectUri)}&scope={Uri.EscapeDataString(dataStore.scope)}";
@@ -41,8 +38,6 @@ namespace spotify_dotnet_api
                 {
                     // Exchange the authorization code for an access token
                     var tokenResponse = await GetSpotifyAccessToken(dataStore, authorizationCode);
-
-
                     // Store the new token for future use
                     publictoken = tokenResponse;
                 }
@@ -52,7 +47,6 @@ namespace spotify_dotnet_api
                 }
             }
         }
-
         public async Task<TokenResponse> GetSpotifyAccessToken(DataStore dataStore, string authorizationCode)
         {
             string tokenUrl = "https://accounts.spotify.com/api/token";
@@ -65,21 +59,16 @@ namespace spotify_dotnet_api
         new KeyValuePair<string, string>("client_id", dataStore.clientId),
         new KeyValuePair<string, string>("client_secret", dataStore.clientSecret)
     });
-
             var byteArray = Encoding.ASCII.GetBytes($"{dataStore.clientId}:{dataStore.clientSecret}");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-
             HttpResponseMessage response = await client.PostAsync(tokenUrl, postData);
             string responseContent = await response.Content.ReadAsStringAsync();
-
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error: {responseContent}");
             }
-
             return JsonConvert.DeserializeObject<TokenResponse>(responseContent);
         }
-
         public async Task<string> ListenForAuthorizationCode(string redirectUri)
         {
             string authorizationCode = null;
@@ -94,19 +83,15 @@ namespace spotify_dotnet_api
 
                 var code = HttpUtility.ParseQueryString(query).Get("code");
                 authorizationCode = code;
-
                 string responseString = "<html><body><h1>Authorization successful! You can close this window.</h1></body></html>";
                 byte[] buffer = Encoding.UTF8.GetBytes(responseString);
                 context.Response.ContentLength64 = buffer.Length;
                 await context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
                 context.Response.OutputStream.Close();
-
                 listener.Stop();
             }
-
             return authorizationCode;
         }
-
         public void OpenBrowser(string url)
         {
             if (System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
@@ -118,7 +103,6 @@ namespace spotify_dotnet_api
                 Console.WriteLine("Failed to open the browser.");
             }
         }
-
         public bool IsTokenExpired(TokenResponse token)
         {
             return token.expires_in <= 0;
@@ -126,12 +110,8 @@ namespace spotify_dotnet_api
         public string GetToken()
         {
             return this.publictoken.access_token;
-        }
-
-        
+        }   
     }
-
-
 }
 public class TokenResponse
 {
@@ -139,6 +119,3 @@ public class TokenResponse
     public string refresh_token { get; set; }
     public int expires_in { get; set; }
 }
-
-
-

@@ -9,7 +9,6 @@ namespace spotify_dotnet_api
         {
             DataStore dataStore = new DataStore();
             HttpClient client = new HttpClient();
-            AccessToken token = new AccessToken(client, dataStore);
 
             Request request = new Request(client, dataStore);
 
@@ -38,13 +37,17 @@ namespace spotify_dotnet_api
             string[] episodes = { "6zs79bz9Nb0lXhoHtGDudJ", "2JYJ9OCjJRhkAhAZ5TqKij", "2Vp7UdSnYpX4Jldd5exkqt" }; // welcome night vale ep 1., cortex ep 1., magnus archives ep 1. 
 
             string playlistId = "3KGWxud7ZLePffJH9OaPom";
-            //////////////////////////////////
-            await token.InitSession(dataStore);
-            //////////////////////////////////
-            ///
-            await trackRequest.CheckUserSavedTrack(token.GetToken(), client, trackId);
-           
+
+      
+            AccessToken accessTokenManager = new AccessToken(client, dataStore);
+
+            await accessTokenManager.InitSession(dataStore);
+
+            string token = accessTokenManager.GetToken();
+            //await playerRequest.GetAvailableDevices(token, client);
+            await playerRequest.SkipToPreviousTrack(token, client, "68b865f7bd07c120d8d6345586c0ceb4a55680e9");
+            await playerRequest.GetUserQueue(token, client);
+
         } 
     }
 }
-      

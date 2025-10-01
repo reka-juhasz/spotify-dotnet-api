@@ -61,11 +61,13 @@ namespace spotify_dotnet_api
         public async Task SkipToNextTrack(string accessToken, HttpClient client, string deviceId)
         {
             string url = $"https://api.spotify.com/v1/me/player/next?device_id={deviceId}";
+            await HeaderFormat(client, accessToken);
             await SendPostRequest(client, url);
         }
         public async Task SkipToPreviousTrack(string accessToken, HttpClient client, string deviceId)
         {
             string url = $"https://api.spotify.com/v1/me/player/previous?device_id={deviceId}";
+            await HeaderFormat(client, accessToken);
             await SendPostRequest(client, url);
         }
 
@@ -142,8 +144,6 @@ namespace spotify_dotnet_api
             await SendPostRequest(client, url);
 
         }
-
-
 
     }
 }
